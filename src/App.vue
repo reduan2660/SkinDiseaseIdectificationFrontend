@@ -4,9 +4,16 @@
     class="font-body w-screen flex flex-row justify-between items-center px-20 pt-2"
   >
     <div class="font-black text-2xl">Predict Skin Disease</div>
-
-    <Button>Settings</Button>
+    <div class="dropdown">
+      <Button> Settings </Button>
+      <div class="dropdown-content">
+        <div>Profile</div>
+        <div>History</div>
+        <div>Logout</div>
+      </div>
+    </div>
   </header>
+
   <RouterView />
 </template>
 
@@ -25,6 +32,9 @@ const loggedIn = ref(false);
 onBeforeMount(() => {
   if (localStorage.getItem("refresh")) {
     refreshToken();
+  } else {
+    router.push("/login");
+    loading.value = false;
   }
 });
 
@@ -57,3 +67,19 @@ function log() {
   console.log(userInf, loggedIn.value);
 }
 </script>
+
+<style scoped>
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 170px;
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
