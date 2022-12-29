@@ -26,7 +26,10 @@
 
     <div>
       <Modal v-model="show" @confirm="confirm">
-        <div>Predicted Result: {{ result }}</div>
+        <div class="text-lg font-bold font-body">Detected: {{ result }}</div>
+        <div class="text-lg font-bold font-body">
+          Treatment: {{ treatment }}
+        </div>
       </Modal>
     </div>
   </div>
@@ -46,6 +49,7 @@ const preview = ref(null);
 const image = ref(null);
 const uploadLabel = ref("Upload");
 const result = ref("");
+const treatment = ref("");
 const show = ref(false);
 
 function previewImage(event) {
@@ -83,6 +87,7 @@ function predict() {
       console.log(res.data);
       uploadLabel.value = "Upload";
       result.value = res.data.disease;
+      treatment.value = res.data.treatment;
       show.value = true;
     })
     .catch((err) => {

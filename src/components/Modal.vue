@@ -8,14 +8,16 @@
     <div class="modal__content">
       <slot :params="params"></slot>
     </div>
-    <div class="modal__action">
-      <ButtonVue @click="$emit('confirm', close)">Confirm</ButtonVue>
+    <div
+      class="flex flex-col items-center bg-gradient-to-r from-cyan-500 to-blue-500 px-10 py-2 rounded mt-6 hover:shadow-lg transition-all duration-200 text-white"
+    >
+      <Button class="text-xl" @click="$emit('confirm', close)">Confirm</Button>
     </div>
   </vue-final-modal>
 </template>
 
 <script>
-import ButtonVue from "./Button.vue";
+import Button from "./Button.vue";
 export default {
   name: "CustomModal",
   inheritAttrs: false,
