@@ -3,7 +3,10 @@
   <header
     class="font-body w-screen flex flex-row justify-between items-center px-20 pt-2"
   >
-    <div class="font-black text-2xl">Predict Skin Disease</div>
+    <div></div>
+    <div class="font-black text-2xl">
+      Predict Skin Disease using Inception v3 Transfer Learning
+    </div>
     <div class="dropdown">
       <Button> Settings </Button>
       <div class="dropdown-content">
