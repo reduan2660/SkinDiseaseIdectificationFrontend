@@ -40,6 +40,8 @@
 
 <script setup>
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
+import { useToast } from "vue-toastification";
+import "vue-toastification/dist/index.css";
 import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
 import { ref, reactive, onMounted } from "vue";
@@ -48,6 +50,7 @@ import { useUserStore } from "../stores/user";
 import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const { userInf, ulogin, token } = useUserStore();
+const toast = useToast();
 
 const preview = ref(null);
 const image = ref(null);
@@ -98,6 +101,8 @@ function predict() {
       loading.value = false;
     })
     .catch((err) => {
+      console.log("Here");
+      toast("Error Occured. Upload a valid image.");
       console.log(err);
       loading.value = false;
     });

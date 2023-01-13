@@ -1,14 +1,14 @@
 <template>
   <Loading v-if="loading" />
   <header
-    class="font-body w-screen flex flex-row justify-between items-center px-20 pt-2"
+    class="font-body w-screen flex flex-row justify-between items-center px-4 md:px-20 pt-2"
   >
     <div></div>
-    <div class="font-black text-2xl mt-4">
+    <div class="font-black text-center md:text-2xl mt-4">
       Predict Skin Disease using Inception v3 Transfer Learning
     </div>
     <div class="dropdown">
-      <Button @click="logout" v-if="userInf.isLoggedIn"> Log out </Button>
+      <Button @click="logout" v-if="userInf.isLoggedIn"> Logout </Button>
       <!-- <div class="dropdown-content">
         <div>Profile</div>
         <div>History</div>
