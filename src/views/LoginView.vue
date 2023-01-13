@@ -24,6 +24,15 @@
         </div>
 
         <Button @click="login"> Login </Button>
+
+        <div class="text-md mt-4">
+          Don't have an account?
+          <span
+            class="text-blue-400 cursor-pointer"
+            @click="router.push('/register')"
+            >Register Here</span
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -46,9 +55,8 @@ onMounted(() => {
 });
 
 function login() {
-  console.log(phone.value, password.value);
   if (phone.value.length !== 0 && password.value.length !== 0) {
-    console.log("there");
+    
     api
       .post("/auth/login/", {
         phone: phone.value,

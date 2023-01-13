@@ -22,7 +22,10 @@
       </template>
     </div>
 
-    <Button v-if="preview" @click="predict">{{ uploadLabel }}</Button>
+    <Button v-if="preview" @click="predict"
+      >{{ uploadLabel }}
+      <span><PulseLoader :loading="loading" :color="`#ffffff`" /></span
+    ></Button>
 
     <div>
       <Modal v-model="show" @confirm="confirm">
@@ -36,6 +39,7 @@
 </template>
 
 <script setup>
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
 import { ref, reactive, onMounted } from "vue";
@@ -51,6 +55,7 @@ const uploadLabel = ref("Upload");
 const result = ref("");
 const treatment = ref("");
 const show = ref(false);
+const loading = ref(false);
 
 function previewImage(event) {
   let input = event.target;
@@ -73,6 +78,7 @@ onMounted(() => {
 });
 
 function predict() {
+  loading.value = true;
   uploadLabel.value = "Uploading";
   result.value = "";
   let dataToPost = new FormData();
@@ -84,14 +90,16 @@ function predict() {
       },
     })
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       uploadLabel.value = "Upload";
       result.value = res.data.disease;
       treatment.value = res.data.treatment;
       show.value = true;
+      loading.value = false;
     })
     .catch((err) => {
       console.log(err);
+      loading.value = false;
     });
 }
 </script>

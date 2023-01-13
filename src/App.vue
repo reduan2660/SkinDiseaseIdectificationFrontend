@@ -4,16 +4,16 @@
     class="font-body w-screen flex flex-row justify-between items-center px-20 pt-2"
   >
     <div></div>
-    <div class="font-black text-2xl">
+    <div class="font-black text-2xl mt-4">
       Predict Skin Disease using Inception v3 Transfer Learning
     </div>
     <div class="dropdown">
-      <Button> Settings </Button>
-      <div class="dropdown-content">
+      <Button @click="logout" v-if="userInf.isLoggedIn"> Log out </Button>
+      <!-- <div class="dropdown-content">
         <div>Profile</div>
         <div>History</div>
-        <div>Logout</div>
-      </div>
+        <div class="cursor-pointer" @click="logout">Logout</div>
+      </div> -->
     </div>
   </header>
 
@@ -28,7 +28,7 @@ import { computed, onBeforeMount, onMounted, ref } from "vue";
 import { useUserStore } from "./stores/user";
 import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
-const { ulogin, token, LoggedIn, userInf } = useUserStore();
+const { ulogin, token, LoggedIn, userInf, LoggedOut } = useUserStore();
 const loading = ref(true);
 const loggedIn = ref(false);
 
@@ -62,12 +62,15 @@ function refreshToken() {
     })
     .catch((err) => {
       loading.value = false;
+      router.push("/login");
       console.log(err);
     });
 }
 
-function log() {
-  console.log(userInf, loggedIn.value);
+function logout() {
+  localStorage.clear("refresh");
+  loggedIn.value = LoggedOut();
+  router.push("/login");
 }
 </script>
 

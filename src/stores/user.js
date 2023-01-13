@@ -22,6 +22,13 @@ export const useUserStore = defineStore("user", () => {
     return userInf.isLoggedIn;
   }
 
+  function LoggedOut() {
+    userInf.isLoggedIn = false;
+    token.access = null;
+    token.refresh = null;
+    return userInf.isLoggedIn;
+  }
+
   function ulogin(_token) {
     userInf.isLoggedIn = true;
     token.access = _token.access;
@@ -42,12 +49,12 @@ export const useUserStore = defineStore("user", () => {
         userInf.phone = res.data.results[0].phone;
         userInf.verified = res.data.results[0].verified;
 
-        console.log(userInf);
+        // console.log(userInf);
       })
       .catch((err) => {
         console.log(err.data);
       });
   }
 
-  return { userInf, ulogin, token, LoggedIn };
+  return { userInf, ulogin, token, LoggedIn, LoggedOut };
 });
