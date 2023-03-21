@@ -29,9 +29,14 @@
 
     <div>
       <Modal v-model="show" @confirm="confirm">
-        <div class="text-lg font-bold font-body">Detected: {{ result }}</div>
-        <div class="text-lg font-bold font-body">
-          Treatment: {{ treatment }}
+        <div class="flex flex-col items-center gap-5">
+          <div class="text-lg font-bold font-body">Detected: {{ result }}</div>
+          <div class="text-lg font-bold font-body">
+            Possibilty: {{ possibility }} %
+          </div>
+          <div class="text-lg font-bold font-body">
+            Treatment: {{ treatment }}
+          </div>
         </div>
       </Modal>
     </div>
@@ -57,6 +62,7 @@ const image = ref(null);
 const uploadLabel = ref("Upload");
 const result = ref("");
 const treatment = ref("");
+const possibility = ref("");
 const show = ref(false);
 const loading = ref(false);
 
@@ -97,6 +103,7 @@ function predict() {
       uploadLabel.value = "Upload";
       result.value = res.data.disease;
       treatment.value = res.data.treatment;
+      possibility.value = res.data.chance;
       show.value = true;
       loading.value = false;
     })
