@@ -22,6 +22,18 @@
       </template>
     </div>
 
+    <div class="mt-10">
+      <div>Entera phone number to send the result to.</div>
+      <div class="mt-4">
+        <input
+          class="text-lg shadow appearance-none border rounded w-full py-4 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          placeholder="Phone"
+          v-model="phone"
+        />
+      </div>
+    </div>
+
     <Button v-if="preview" @click="predict"
       >{{ uploadLabel }}
       <span><PulseLoader :loading="loading" :color="`#ffffff`" /></span
@@ -31,9 +43,9 @@
       <Modal v-model="show" @confirm="confirm">
         <div class="flex flex-col items-center gap-5">
           <div class="text-lg font-bold font-body">Detected: {{ result }}</div>
-          <div class="text-lg font-bold font-body">
+          <!-- <div class="text-lg font-bold font-body">
             Possibilty: {{ possibility }} %
-          </div>
+          </div> -->
           <div class="text-lg font-bold font-body">
             Treatment: {{ treatment }}
           </div>
@@ -65,6 +77,7 @@ const treatment = ref("");
 const possibility = ref("");
 const show = ref(false);
 const loading = ref(false);
+const phone = ref(null);
 
 function previewImage(event) {
   let input = event.target;
@@ -92,6 +105,8 @@ function predict() {
   result.value = "";
   let dataToPost = new FormData();
   dataToPost.append("image", image.value);
+
+  if (phone != null) dataToPost.append("phone", phone.value);
   api
     .post("/predict/", dataToPost, {
       headers: {
