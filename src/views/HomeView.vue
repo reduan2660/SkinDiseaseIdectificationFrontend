@@ -23,7 +23,7 @@
     </div>
 
     <div class="mt-10">
-      <div>Entera phone number to send the result to.</div>
+      <div>Enter a phone number to send the result to.</div>
       <div class="mt-4">
         <input
           class="text-lg shadow appearance-none border rounded w-full py-4 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -38,6 +38,10 @@
       >{{ uploadLabel }}
       <span><PulseLoader :loading="loading" :color="`#ffffff`" /></span
     ></Button>
+
+    <footer class="fixed bottom-2">
+      <p>© Copyright by Md. Al Mamun, CSE, Jahangirnagar University, 2023.</p>
+    </footer>
 
     <div>
       <Modal v-model="show" @confirm="confirm">
